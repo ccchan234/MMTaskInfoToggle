@@ -1,0 +1,24 @@
+' Name: ToggleTaskInfo
+' Description: Toggles the visibility of task information in the active map
+' Author: Claude
+' Date: 2024
+
+Sub Main
+    With ActiveDocument
+        Dim currentViewFilter As Long
+        Dim taskInfoFlag As Long
+        
+        ' Get current view filter state
+        currentViewFilter = .Filter.GetViewFilter
+        taskInfoFlag = MmViewFilterFlags.mmViewFilterFlagHideTaskInformation
+        
+        ' Toggle task info visibility
+        If (currentViewFilter And taskInfoFlag) = taskInfoFlag Then
+            ' Task info is hidden, show it
+            .Filter.SetViewFilter(currentViewFilter And (Not taskInfoFlag))
+        Else
+            ' Task info is visible, hide it
+            .Filter.SetViewFilter(currentViewFilter Or taskInfoFlag)
+        End If
+    End With
+End Sub
